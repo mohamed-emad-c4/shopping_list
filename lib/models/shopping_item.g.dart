@@ -22,13 +22,14 @@ class ShoppingItemAdapter extends TypeAdapter<ShoppingItem> {
       quantity: fields[2] as int,
       isPurchased: fields[3] as bool,
       category: fields[4] as String,
+      price: fields[5] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, ShoppingItem obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class ShoppingItemAdapter extends TypeAdapter<ShoppingItem> {
       ..writeByte(3)
       ..write(obj.isPurchased)
       ..writeByte(4)
-      ..write(obj.category);
+      ..write(obj.category)
+      ..writeByte(5)
+      ..write(obj.price);
   }
 
   @override

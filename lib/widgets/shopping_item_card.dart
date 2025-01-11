@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/shopping_list_provider.dart';
 import '../models/shopping_item.dart';
+import '../providers/shopping_provider.dart';
 
 class ShoppingItemCard extends StatelessWidget {
   final ShoppingItem item;
@@ -10,37 +10,49 @@ class ShoppingItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: Key(item.id),
-      direction: DismissDirection.endToStart,
-      background: Container(
-        color: Colors.red,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20),
-        child: const Icon(Icons.delete, color: Colors.white),
+    final totalPrice = item.price * item.quantity;
+
+    return Card(
+      elevation: 6,
+      margin: const EdgeInsets.only(bottom: 16.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
       ),
-      onDismissed: (_) {
-        Provider.of<ShoppingListProvider>(context, listen: false)
-            .removeItem(item.id);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('تم حذف العنصر بنجاح!'),
-            backgroundColor: Theme.of(context).primaryColor,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              item.isPurchased ? Colors.green.shade100 : Colors.blue.shade100,
+              Colors.white,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-        );
-      },
-      child: Card(
-        margin: const EdgeInsets.only(bottom: 16.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: ListTile(
-          leading: const Icon(Icons.shopping_cart),
-          title: Text(item.name),
+          leading: CircleAvatar(
+            backgroundColor: item.isPurchased ? Colors.green : Colors.blue,
+            child: Icon(
+              item.isPurchased ? Icons.check : Icons.shopping_cart,
+              color: Colors.white,
+            ),
+          ),
+          title: Text(
+            item.name,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              decoration: item.isPurchased ? TextDecoration.lineThrough : null,
+              color: item.isPurchased ? Colors.grey : Colors.black,
+            ),
+          ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('الكمية: ${item.quantity}'),
+              Text('السعر: ${item.price.toStringAsFixed(2)} جنيه'),
+              Text('الإجمالي: ${totalPrice.toStringAsFixed(2)} جنيه'),
               Text('الفئة: ${item.category}'),
             ],
           ),

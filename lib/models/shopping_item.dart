@@ -17,13 +17,17 @@ class ShoppingItem {
   bool isPurchased;
 
   @HiveField(4)
-  final String category; // إضافة حقل الفئة
+  final String category;
+
+  @HiveField(5)
+  final double price; // إضافة حقل السعر
 
   ShoppingItem({
     required this.id,
     required this.name,
     this.quantity = 1,
     this.isPurchased = false,
-    required this.category, // إضافة الفئة كحقل مطلوب
+    required this.category,
+    required this.price, // إضافة السعر كحقل مطلوب
   });
 }

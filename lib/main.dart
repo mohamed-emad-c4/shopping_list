@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'screens/home_screen.dart';
-import 'providers/shopping_list_provider.dart';
+import 'providers/shopping_provider.dart';
 import 'models/shopping_item.dart';
+import 'screens/main_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ShoppingItemAdapter());
   await Hive.openBox<ShoppingItem>('shoppingBox');
+  await Hive.openBox('settings'); // تهيئة صندوق الإعدادات
   runApp(
     MultiProvider(
       providers: [
@@ -27,25 +28,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'قائمة التسوق',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.light,
-        cardTheme: CardTheme(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.light,
         ),
+        fontFamily: 'Tajawal', // خط يدعم اللغة العربية
       ),
       darkTheme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.dark,
-        cardTheme: CardTheme(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.dark,
         ),
+        fontFamily: 'Tajawal', // خط يدعم اللغة العربية
       ),
       themeMode: ThemeMode.system,
       home: const HomeScreen(),
