@@ -23,18 +23,27 @@ class ShoppingItemCard extends StatelessWidget {
         Provider.of<ShoppingListProvider>(context, listen: false)
             .removeItem(item.id);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('تم حذف العنصر بنجاح!'),
+          SnackBar(
+            content: const Text('تم حذف العنصر بنجاح!'),
+            backgroundColor: Theme.of(context).primaryColor,
           ),
         );
       },
       child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        elevation: 3,
+        margin: const EdgeInsets.only(bottom: 16.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: ListTile(
           leading: const Icon(Icons.shopping_cart),
           title: Text(item.name),
-          subtitle: Text('الكمية: ${item.quantity}'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('الكمية: ${item.quantity}'),
+              Text('الفئة: ${item.category}'),
+            ],
+          ),
           trailing: Checkbox(
             value: item.isPurchased,
             onChanged: (_) {

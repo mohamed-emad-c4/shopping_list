@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-part 'shopping_item.g.dart'; // سيتم إنشاء هذا الملف تلقائيًا
+part 'shopping_item.g.dart';
 
 @HiveType(typeId: 0)
 class ShoppingItem {
@@ -16,10 +16,14 @@ class ShoppingItem {
   @HiveField(3)
   bool isPurchased;
 
+  @HiveField(4)
+  final String category; // إضافة حقل الفئة
+
   ShoppingItem({
     required this.id,
     required this.name,
     this.quantity = 1,
     this.isPurchased = false,
+    required this.category, // إضافة الفئة كحقل مطلوب
   });
 }
