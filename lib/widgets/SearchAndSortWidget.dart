@@ -61,7 +61,7 @@ class SearchAndSortWidget extends StatelessWidget {
               DropdownMenuItem(value: 'الفئة', child: Text('الفئة')),
             ],
             onChanged: (value) {
-              if (value != null) {
+              if (value != null) { 
                 onSortOptionChanged(value);
               }
             },
