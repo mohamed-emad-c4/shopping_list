@@ -33,13 +33,14 @@ class ShoppingListProvider with ChangeNotifier {
     return totalSpent > _budget;
   }
 
-  void addItem(String name, int quantity, String category, double price) {
+  void addItem(String name, int quantity, String category, double price, {String priority = "متوسط"}) {
     final item = ShoppingItem(
       id: DateTime.now().toString(),
       name: name,
       quantity: quantity,
       category: category,
       price: price,
+      priority: priority, // إضافة الأولوية
     );
     _shoppingBox.put(item.id, item);
     notifyListeners();
@@ -82,5 +83,25 @@ class ShoppingListProvider with ChangeNotifier {
 
   List<ShoppingItem> getPendingItems() {
     return _shoppingBox.values.where((item) => !item.isPurchased).toList();
+  }
+  List<ShoppingItem> sortItemsByPriority(List<ShoppingItem> items) {
+    final priorityOrder = {"عاجل": 1, "متوسط": 2, "منخفض": 3};
+    items.sort((a, b) => priorityOrder[a.priority]!.compareTo(priorityOrder[b.priority]!));
+    return items;
+  }
+
+  List<ShoppingItem> sortItemsByPrice(List<ShoppingItem> items) {
+    items.sort((a, b) => a.price.compareTo(b.price));
+    return items;
+  }
+
+  List<ShoppingItem> sortItemsByQuantity(List<ShoppingItem> items) {
+    items.sort((a, b) => a.quantity.compareTo(b.quantity));
+    return items;
+  }
+
+  List<ShoppingItem> sortItemsByCategory(List<ShoppingItem> items) {
+    items.sort((a, b) => a.category.compareTo(b.category));
+    return items;
   }
 }

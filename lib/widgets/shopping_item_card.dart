@@ -12,6 +12,22 @@ class ShoppingItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final totalPrice = item.price * item.quantity;
 
+    // تحديد لون الأولوية
+    Color priorityColor;
+    switch (item.priority) {
+      case "عاجل":
+        priorityColor = Colors.red;
+        break;
+      case "متوسط":
+        priorityColor = Colors.orange;
+        break;
+      case "منخفض":
+        priorityColor = Colors.green;
+        break;
+      default:
+        priorityColor = Colors.grey;
+    }
+
     return Card(
       elevation: 6,
       margin: const EdgeInsets.only(bottom: 16.0),
@@ -54,14 +70,33 @@ class ShoppingItemCard extends StatelessWidget {
               Text('السعر: ${item.price.toStringAsFixed(2)} جنيه'),
               Text('الإجمالي: ${totalPrice.toStringAsFixed(2)} جنيه'),
               Text('الفئة: ${item.category}'),
+              Text(
+                'الأولوية: ${item.priority}',
+                style: TextStyle(
+                  color: priorityColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
-          trailing: Checkbox(
-            value: item.isPurchased,
-            onChanged: (_) {
-              Provider.of<ShoppingListProvider>(context, listen: false)
-                  .togglePurchasedStatus(item.id);
-            },
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.delete, color: Colors.red),
+                onPressed: () {
+                  Provider.of<ShoppingListProvider>(context, listen: false)
+                      .removeItem(item.id);
+                },
+              ),
+              Checkbox(
+                value: item.isPurchased,
+                onChanged: (_) {
+                  Provider.of<ShoppingListProvider>(context, listen: false)
+                      .togglePurchasedStatus(item.id);
+                },
+              ),
+            ],
           ),
         ),
       ),

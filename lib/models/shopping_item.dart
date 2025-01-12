@@ -20,7 +20,10 @@ class ShoppingItem {
   final String category;
 
   @HiveField(5)
-  final double price; // إضافة حقل السعر
+  final double price;
+
+  @HiveField(6) // إضافة حقل الأولوية
+  final String priority; // يمكن أن تكون: "عاجل", "متوسط", "منخفض"
 
   ShoppingItem({
     required this.id,
@@ -28,6 +31,7 @@ class ShoppingItem {
     this.quantity = 1,
     this.isPurchased = false,
     required this.category,
-    required this.price, // إضافة السعر كحقل مطلوب
+    required this.price,
+    this.priority = "متوسط", // قيمة افتراضية
   });
 }
