@@ -11,90 +11,121 @@ class ShoppingItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final totalPrice = item.price * item.quantity;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     // تحديد لون الأولوية
     Color priorityColor;
     switch (item.priority) {
       case "عاجل":
-        priorityColor = Colors.red;
+        priorityColor = const Color(0xFFEF5350); // أحمر
         break;
       case "متوسط":
-        priorityColor = Colors.orange;
+        priorityColor = const Color(0xFFFFA726); // برتقالي
         break;
       case "منخفض":
-        priorityColor = Colors.green;
+        priorityColor = const Color(0xFF66BB6A); // أخضر
         break;
       default:
         priorityColor = Colors.grey;
     }
 
     return Card(
-      elevation: 6,
-      margin: const EdgeInsets.only(bottom: 16.0),
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(8),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              item.isPurchased ? Colors.green.shade100 : Colors.blue.shade100,
-              Colors.white,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: item.isPurchased ? Colors.green : Colors.blue,
-            child: Icon(
-              item.isPurchased ? Icons.check : Icons.shopping_cart,
-              color: Colors.white,
-            ),
-          ),
-          title: Text(
-            item.name,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              decoration: item.isPurchased ? TextDecoration.lineThrough : null,
-              color: item.isPurchased ? Colors.grey : Colors.black,
-            ),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: () {
+          // إضافة تفاعل عند النقر (اختياري)
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
             children: [
-              Text('الكمية: ${item.quantity}'),
-              Text('السعر: ${item.price.toStringAsFixed(2)} جنيه'),
-              Text('الإجمالي: ${totalPrice.toStringAsFixed(2)} جنيه'),
-              Text('الفئة: ${item.category}'),
-              Text(
-                'الأولوية: ${item.priority}',
-                style: TextStyle(
-                  color: priorityColor,
-                  fontWeight: FontWeight.bold,
+              // أيقونة العنصر
+              Icon(
+                item.isPurchased ? Icons.check_circle : Icons.shopping_cart,
+                color: item.isPurchased ? const Color(0xFF66BB6A) : const Color(0xFF42A5F5),
+                size: 24,
+              ),
+              const SizedBox(width: 12),
+              // تفاصيل العنصر
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.name,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: isDarkMode ? Colors.white : Colors.black87,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'الكمية: ${item.quantity} | السعر: ${item.price.toStringAsFixed(2)} جنيه',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: isDarkMode ? Colors.grey[300] : Colors.black54,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'الإجمالي: ${totalPrice.toStringAsFixed(2)} جنيه',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: isDarkMode ? Colors.grey[300] : Colors.black54,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
-                onPressed: () {
-                  Provider.of<ShoppingListProvider>(context, listen: false)
-                      .removeItem(item.id);
-                },
-              ),
-              Checkbox(
-                value: item.isPurchased,
-                onChanged: (_) {
-                  Provider.of<ShoppingListProvider>(context, listen: false)
-                      .togglePurchasedStatus(item.id);
-                },
+              // الأولوية والأيقونات
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: priorityColor.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      item.priority,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: priorityColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.delete, size: 20, color: Color(0xFFEF5350)),
+                        onPressed: () {
+                          Provider.of<ShoppingListProvider>(context, listen: false)
+                              .removeItem(item.id);
+                        },
+                      ),
+                      Checkbox(
+                        value: item.isPurchased,
+                        onChanged: (_) {
+                          Provider.of<ShoppingListProvider>(context, listen: false)
+                              .togglePurchasedStatus(item.id);
+                        },
+                        activeColor: const Color(0xFF66BB6A),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

@@ -9,7 +9,6 @@ import '../widgets/SearchAndSortWidget.dart';
 import '../widgets/ShoppingAppBar.dart';
 import '../widgets/ShoppingItemList.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -93,8 +92,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   onPressed: () => _showSetBudgetDialog(context),
                 ),
               ],
-              pinned: true, // يثبت الـ AppBar عند التمرير
-              floating: true, // يظهر الـ AppBar عند التمرير لأعلى
+              pinned: true,
+              floating: true,
               bottom: TabBar(
                 controller: _tabController,
                 indicatorColor: Colors.white,

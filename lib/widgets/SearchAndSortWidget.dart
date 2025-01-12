@@ -14,6 +14,8 @@ class SearchAndSortWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -21,7 +23,7 @@ class SearchAndSortWidget extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isDarkMode ? Colors.grey[800] : Colors.white,
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
@@ -38,6 +40,12 @@ class SearchAndSortWidget extends StatelessWidget {
                   prefixIcon: const Icon(Icons.search),
                   border: InputBorder.none,
                   contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                  hintStyle: TextStyle(
+                    color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                  ),
+                ),
+                style: TextStyle(
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
                 onChanged: onSearchChanged,
               ),
