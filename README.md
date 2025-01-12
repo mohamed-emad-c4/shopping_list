@@ -22,7 +22,7 @@ A modern and intuitive **Shopping List App** built with Flutter to help you mana
 
 | Home Screen | Add Item | Categories |
 |-------------|----------|------------|
-| ![Home Screen](https://via.placeholder.com/300x600.png?text=Home+Screen) | ![Add Item](https://via.placeholder.com/300x600.png?text=Add+Item) | ![Categories](https://via.placeholder.com/300x600.png?text=Categories) |
+| ![Samsung Galaxy S20 Ultra Presentation](https://github.com/user-attachments/assets/d1ceb3ee-2044-4892-a767-2793b1a34952) |
 
 ---
 
@@ -88,11 +88,9 @@ Special thanks to Hive for providing a lightweight and efficient local database.
 Contact 📧
 If you have any questions or suggestions, feel free to reach out:
 
-Email: your-email@example.com
+Email: zemax.c4@gmail.com
 
-GitHub: your-username
-
-Twitter: @your-handle
+GitHub: @mohamed-emad-c4
 
 Happy Shopping! 🛍️
 
