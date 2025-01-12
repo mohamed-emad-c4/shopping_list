@@ -1,6 +1,6 @@
 # Shopping List App 🛒
 
-![Shopping List App Banner](https://via.placeholder.com/1200x400.png?text=Shopping+List+App+Banner) <!-- Replace with your app's banner image -->
+![icone](https://github.com/user-attachments/assets/6b3b34dc-7ff4-48a7-824c-c142b60d1089)
 
 A modern and intuitive **Shopping List App** built with Flutter to help you manage your shopping tasks efficiently. Keep track of your items, categorize them, and never forget anything on your shopping list again!
 
@@ -21,7 +21,7 @@ A modern and intuitive **Shopping List App** built with Flutter to help you mana
 ## Screenshots 📸
 
 | Home Screen | Add Item | Categories |
-|-------------|----------|------------|
+|---------------------------------------------------------------------------------------------------------------------------|
 | ![Samsung Galaxy S20 Ultra Presentation](https://github.com/user-attachments/assets/d1ceb3ee-2044-4892-a767-2793b1a34952) |
 
 ---
