@@ -35,6 +35,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.0.6
+  flutter_launcher_icons : ^0.13.1
+  flutter_native_splash: ^2.3.1
   hive: ^2.2.3
   provider: ^6.0.0
   flutter_slidable: ^2.0.0
@@ -44,7 +46,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.3.3
   hive_generator: ^2.0.1
-  flutter_launcher_icons: ^0.14.2
+  flutter_launcher_icons: ^0.13.1
   icons_launcher: ^3.0.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -56,14 +58,15 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+flutter_native_splash:
+  color: "#FFFFFF"  # لون الخلفية
+  image: "assets/icon/icon.png"  # مسار صورة الشاشة التمهيدية
 # The following section is specific to Flutter packages.
 flutter_launcher_icons:
   android: true  # Generate icons for Android
-  ios: true      # Generate icons for iOS
   image_path:  'assets/icon/icon.png' # Path to your icon
-  adaptive_icon_background: "#FFFFFF"  # Background color for adaptive icons (Android)
-  adaptive_icon_foreground:  'assets/icon/icon.png'  # Foreground image for adaptive icons (Android)
+  
+  # Foreground image for adaptive icons (Android)
 flutter:
   uses-material-design: true
 
