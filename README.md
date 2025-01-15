@@ -1,5 +1,7 @@
 # Shopping List App 🛒
 
+> *"اللهم اجعل هذا العمل خالصًا لوجهك الكريم، واجعله نورًا في الدنيا وذخرًا في الآخرة، وبارك فيه وانفع به عبادك، وتقبله مني يا أرحم الراحمين."*
+
 ![Screenshot 2025-01-12 184658](https://github.com/user-attachments/assets/23323db6-e0d6-48d1-bbca-618e596582e6)
 
 A modern and intuitive **Shopping List App** built with Flutter to help you manage your shopping tasks efficiently. Keep track of your items, categorize them, and never forget anything on your shopping list again!
